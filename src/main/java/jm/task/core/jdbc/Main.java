@@ -9,7 +9,6 @@ import java.sql.*;
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         UserDao ud = new UserDaoJDBCImpl();
-//        ud.dropUsersTable();
         ud.createUsersTable();
         System.out.println("Saving user in DB...");
         ud.saveUser("A", "AA", (byte) 10);
