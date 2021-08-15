@@ -18,6 +18,5 @@ public class Main {
         ud.getAllUsers();
         ud.cleanUsersTable();
         ud.dropUsersTable();
-
     }
 }
