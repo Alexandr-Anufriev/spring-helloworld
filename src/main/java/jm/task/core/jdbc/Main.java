@@ -1,22 +1,21 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.dao.UserDao;
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
-
+import jm.task.core.jdbc.service.UserService;
+import jm.task.core.jdbc.service.UserServiceImpl;
 
 import java.sql.*;
 
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserDao ud = new UserDaoJDBCImpl();
-        ud.createUsersTable();
-        System.out.println("Saving user in DB...");
-        ud.saveUser("A", "AA", (byte) 10);
-        ud.saveUser("B", "BB", (byte) 20);
-        ud.saveUser("C", "CC", (byte) 30);
-        ud.saveUser("D", "DD", (byte) 40);
-        ud.getAllUsers();
-        ud.cleanUsersTable();
-        ud.dropUsersTable();
+        UserService userService = new UserServiceImpl();
+
+        userService.createUsersTable();
+        userService.saveUser("Александр", "Сидиров", (byte)25);
+        userService.saveUser("Владимир", "Винокур", (byte) 70);
+        userService.saveUser("Сергей", "Малахов", (byte) 43);
+        userService.saveUser("Екатерина", "Петросян", (byte) 19);
+        userService.getAllUsers();
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
     }
 }
