@@ -40,14 +40,15 @@ public class Util {
         settings.put(Environment.USER, NAME);
         settings.put(Environment.PASS, PASSWORD);
         settings.put(Environment.SHOW_SQL,"true");
-
+        settings.put(Environment.HBM2DDL_AUTO, "create-drop");
+        settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
         configuration.addProperties(settings);
         configuration.addAnnotatedClass(User.class);
 
-
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties()).build();
+                .applySettings(configuration.getProperties())
+                .build();
 
         SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         return sessionFactory;
