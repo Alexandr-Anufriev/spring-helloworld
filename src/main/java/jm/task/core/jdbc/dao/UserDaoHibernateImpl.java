@@ -10,10 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
-    private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory = Util.getSessionFactory();
 
     public UserDaoHibernateImpl() {
-        sessionFactory = Util.getSessionFactory();
     }
 
     @Override
@@ -68,7 +67,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
-            User user = (User) session.get(User.class, id);
+            User user = session.get(User.class, id);
             session.delete(user);
             transaction.commit();
             session.close();
@@ -84,13 +83,13 @@ public class UserDaoHibernateImpl implements UserDao {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
 
-            users = (List<User>) session.createQuery("FROM User").list();
+            users = session.createQuery("from User").list();
             transaction.commit();
             session.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return users;
     }
 
     @Override
